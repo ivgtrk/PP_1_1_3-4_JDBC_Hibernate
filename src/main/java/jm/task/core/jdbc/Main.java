@@ -1,34 +1,34 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserServiceImpl;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
-        userDaoJDBC.createUsersTable();
+        UserServiceImpl uService = new UserServiceImpl();
+        uService.createUsersTable();
 
         // Save Users in DB
-        userDaoJDBC.saveUser("Ivan", "Ivanov", (byte) 20);
-        userDaoJDBC.saveUser("Petr", "Petrov", (byte) 22);
-        userDaoJDBC.saveUser("Victor", "Victorov", (byte) 24);
-        userDaoJDBC.saveUser("Igor", "Lopatin", (byte) 26);
+        uService.saveUser("Ivan", "Ivanov", (byte) 20);
+        uService.saveUser("Petr", "Petrov", (byte) 22);
+        uService.saveUser("Victor", "Victorov", (byte) 24);
+        uService.saveUser("Igor", "Lopatin", (byte) 26);
 
         // Read all User and print...
-        List<User> uList = userDaoJDBC.getAllUsers();
+        List<User> uList = uService.getAllUsers();
         Print(uList);
 
         // Delete User with ID 3...
-        userDaoJDBC.removeUserById(3);
+        uService.removeUserById(3);
         // Read all Users again...
-        uList = userDaoJDBC.getAllUsers();
+        uList = uService.getAllUsers();
         Print(uList);
 
         // Clean table and drop it...
-        userDaoJDBC.cleanUsersTable();
-        userDaoJDBC.dropUsersTable();
+        uService.cleanUsersTable();
+        uService.dropUsersTable();
     }
 
     private static void Print(List<User> users) {
