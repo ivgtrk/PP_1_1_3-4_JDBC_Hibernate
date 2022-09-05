@@ -1,42 +1,28 @@
 package jm.task.core.jdbc.util;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
     // реализуйте настройку соеденения с БД
-    Connection connection;
-    Driver driver;
+    static final String URL = "jdbc:mysql://localhost:3306/dbusers";
 
-    public void OpenConnection(String url, String username, String password) {
+    public static Connection getConnection() {
+        Connection conn = null;
+
         try {
-            driver = new com.mysql.jdbc.Driver();
-            DriverManager.registerDriver(driver);
-        } catch (SQLException ex) {
-            System.out.println("Error create or registered driver!");
-            return;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Unable to find the driver!");
         }
 
         try {
-            connection = DriverManager.getConnection(url, username, password);
-            if(!connection.isClosed()) {
-                System.out.println("Соединение с БД установлено!");
-            }
+            conn = DriverManager.getConnection(URL, "root", "root");
+            System.out.println("Connection is established!");
         } catch (SQLException ex) {
-            System.out.println("Error create connection!");
+            System.out.println("Connection opening error!");
         }
-    }
-
-    public void CloseConnection() {
-        try {
-            if (!connection.isClosed()) {
-                connection.close();
-                System.out.println("Соединение с БД закрыто!");
-            }
-        } catch (SQLException ex) {
-            System.out.println("Cannot close connection!");
-        }
+        return conn;
     }
 }
