@@ -1,13 +1,13 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserServiceImpl;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
-        UserDaoHibernateImpl userDaoHibernate = new UserDaoHibernateImpl();
+        UserServiceImpl userDaoHibernate = new UserServiceImpl();
         userDaoHibernate.createUsersTable();
 
         // Save Users in DB
